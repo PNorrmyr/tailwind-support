@@ -18,7 +18,8 @@
         <span>Tailwind</span>
       </a>
       <nav class="site-nav">
-        <a href="index.html">Support</a>
+        <a href="index.html#features">Features</a>
+        <a href="index.html#support">Support</a>
         <a href="privacy.html" class="active">Privacy</a>
         <a href="terms.html">Terms</a>
       </nav>
@@ -33,6 +34,13 @@
 
   <main class="legal">
     <p>Tailwind ("we", "our", or "us") is committed to protecting your privacy. This Privacy Policy explains what data we collect, how we use it, and your rights.</p>
+
+    <div class="callout">
+      <span class="callout-icon">🔒</span>
+      <div>
+        <strong>Your crew portal password is never stored.</strong> Tailwind only ever reads your roster — your airline login password is never collected, transmitted, or saved on our servers, and your username lives only in your device's encrypted secure storage.
+      </div>
+    </div>
 
     <h2>1. Data We Collect</h2>
     <p>When you sign in with Google or Apple, we receive your name and email address. During onboarding you provide your airline crew portal (Okta/HYPR) username. Your profile photo is optional.</p>
@@ -51,12 +59,12 @@
     <h2>4. Your Crew Portal Credentials</h2>
     <p>Your airline crew portal password is never collected or stored by Tailwind. Your username is stored in your device's encrypted secure storage (iOS Keychain / Android Keystore) and is only used locally during the sync process — it is not transmitted to or retained by our servers.</p>
 
-    <h2>5. Third-Party Services</h2>
-    <p>Tailwind uses the following third-party services:</p>
-    <ul>
-      <li>Supabase (authentication, database, and file storage)</li>
-      <li>Google (sign-in)</li>
-      <li>Apple (sign-in)</li>
+    <h2>5. Data Processors &amp; Third-Party Services</h2>
+    <p>To provide a stable service, Tailwind relies on a small number of specialized providers:</p>
+    <ul class="processor-list">
+      <li><strong>Supabase</strong> — authentication, database, and file storage for your profile, roster backup, and avatar.</li>
+      <li><strong>Render</strong> — hosts the backend service that parses your roster PDF.</li>
+      <li><strong>Google / Apple</strong> — sign-in. Each acts as its own data controller for the sign-in data it processes; see their respective privacy policies.</li>
     </ul>
     <p>If you enable calendar sync, your roster events are written directly to your chosen device calendar provider (e.g. Apple Calendar, Google Calendar). We do not share your personal data with any other third parties.</p>
 
@@ -78,7 +86,7 @@
 
   <footer>
     <div class="footer-links">
-      <a href="index.html">Support</a>
+      <a href="index.html#support">Support</a>
       <a href="terms.html">Terms &amp; Conditions</a>
       <a href="mailto:tailwind.support@gmail.com">Contact</a>
     </div>

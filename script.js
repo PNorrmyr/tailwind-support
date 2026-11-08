@@ -23,6 +23,39 @@
       el.style.transitionDelay = Math.min(i * 60, 240) + "ms";
       io.observe(el);
     });
+
+    // Safety net: a large instant jump (anchor link, "scroll to" button, or a
+    // fast fling) can move an element straight from fully-below to
+    // fully-above the viewport without its intersection ratio ever crossing
+    // the threshold, so the observer never fires for it. Catch those directly.
+    var sweepPastElements = function () {
+      var viewportH = window.innerHeight || document.documentElement.clientHeight;
+      revealEls.forEach(function (el) {
+        if (el.classList.contains("in-view")) return;
+        var rect = el.getBoundingClientRect();
+        if (rect.bottom < 0 || rect.top > viewportH) {
+          // Already off-screen in either direction after a jump — if it's
+          // above the viewport the user has passed it, so just show it.
+          if (rect.bottom < 0) {
+            el.classList.add("in-view");
+            io.unobserve(el);
+          }
+        }
+      });
+    };
+    var sweepTicking = false;
+    var scheduleSweep = function () {
+      if (!sweepTicking) {
+        window.requestAnimationFrame(function () {
+          sweepPastElements();
+          sweepTicking = false;
+        });
+        sweepTicking = true;
+      }
+    };
+    window.addEventListener("scroll", scheduleSweep, { passive: true });
+    window.addEventListener("hashchange", scheduleSweep);
+    scheduleSweep();
   }
 
   // Subtle parallax drift on the phone stack as the page scrolls.
