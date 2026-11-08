@@ -181,6 +181,12 @@ main {
 
 .btn.secondary:hover { background: #ddeaf8; }
 
+.email-fallback {
+  margin: 12px 0 0;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
 section.block {
   margin-top: 56px;
 }
