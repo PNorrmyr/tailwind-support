@@ -6,6 +6,9 @@
   <title>Support – Tailwind</title>
   <meta name="description" content="Get help with Tailwind, the roster and logbook app for airline pilots.">
   <link rel="icon" href="assets/icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,560;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -24,14 +27,36 @@
   </header>
 
   <section class="hero">
-    <span class="eyebrow">Tailwind Support</span>
-    <h1>We're here<br><span class="accent">to help</span></h1>
-    <p>Roster sync and logbook for airline pilots. Questions, bugs, or data requests — you'll always reach a real person.</p>
-    <div class="hero-terminal">
-      <div class="terminal-dots"><span></span><span></span><span></span></div>
-      <div class="terminal-row"><span class="prompt">$</span> tailwind sync</div>
-      <div class="terminal-row ok">&#10003; Roster synced — 3 new duties found</div>
-      <div class="terminal-row muted">Next check-in in 14h 20m</div>
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <span class="eyebrow">Support · Tailwind</span>
+        <h1>Questions land<br><em>safely</em> here.</h1>
+        <p class="lede">Tailwind keeps your roster and logbook in sync automatically. <strong>If something looks off, tell us</strong> — we read every message ourselves, no ticket queue, no bot.</p>
+      </div>
+      <div class="ticket">
+        <div class="ticket-main">
+          <div class="ticket-field">
+            <span class="ticket-label">Passenger</span>
+            <span class="ticket-value">You</span>
+          </div>
+          <div class="ticket-field">
+            <span class="ticket-label">Status</span>
+            <span class="ticket-value ok">On time</span>
+          </div>
+          <div class="ticket-field">
+            <span class="ticket-label">From</span>
+            <span class="ticket-value">Your question</span>
+          </div>
+          <div class="ticket-field">
+            <span class="ticket-label">To</span>
+            <span class="ticket-value">A real answer</span>
+          </div>
+        </div>
+        <div class="ticket-stub">
+          <span>Reply</span>
+          <strong>&lt;24h</strong>
+        </div>
+      </div>
     </div>
   </section>
 

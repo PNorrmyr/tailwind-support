@@ -4,12 +4,15 @@
   --navy-light: #163d73;
   --blue-accent: #5b9bd5;
   --blue-accent-soft: #e8f1fb;
+  --amber: #e2a257;
   --text: #16212e;
   --text-muted: #5a6472;
   --bg: #ffffff;
   --bg-soft: #f5f7fa;
   --border: #e3e8ef;
   --radius: 14px;
+  --serif: "Fraunces", Georgia, "Times New Roman", serif;
+  --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
 }
 
 * { box-sizing: border-box; }
@@ -18,7 +21,7 @@ html { scroll-behavior: smooth; }
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family: var(--sans);
   color: var(--text);
   background: var(--bg);
   line-height: 1.65;
@@ -35,7 +38,7 @@ a:hover { text-decoration: underline; }
 }
 
 .site-header .header-inner {
-  max-width: 880px;
+  max-width: 920px;
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -67,134 +70,216 @@ a:hover { text-decoration: underline; }
 
 .site-nav {
   display: flex;
-  gap: 20px;
+  align-items: center;
+  gap: 26px;
 }
 
 .site-nav a {
-  color: rgba(255, 255, 255, 0.82);
+  position: relative;
+  color: rgba(255, 255, 255, 0.72);
   font-size: 14px;
   font-weight: 500;
+  padding-bottom: 4px;
 }
 
-.site-nav a:hover { color: #fff; }
+.site-nav a:hover { color: #fff; text-decoration: none; }
+
 .site-nav a.active { color: #fff; }
+
+.site-nav a.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--amber);
+}
+
+/* ---------- Hero ---------- */
 
 .hero {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(160deg, var(--navy-dark), var(--navy) 55%, var(--navy-light));
+  background:
+    radial-gradient(640px circle at 88% 102%, rgba(226, 162, 87, 0.26), transparent 60%),
+    radial-gradient(520px circle at 6% -4%, rgba(91, 155, 213, 0.22), transparent 55%),
+    linear-gradient(160deg, var(--navy-dark), var(--navy) 55%, var(--navy-light));
   color: #fff;
-  padding: 64px 24px 72px;
-  text-align: center;
+  padding: 76px 24px 96px;
 }
 
 .hero::before {
   content: "";
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
-  background-size: 22px 22px;
-  -webkit-mask-image: radial-gradient(ellipse at 50% 0%, black 35%, transparent 75%);
-  mask-image: radial-gradient(ellipse at 50% 0%, black 35%, transparent 75%);
+  background-image: radial-gradient(rgba(255, 255, 255, 0.09) 1px, transparent 1px);
+  background-size: 24px 24px;
+  -webkit-mask-image: radial-gradient(ellipse at 20% 10%, black 30%, transparent 70%);
+  mask-image: radial-gradient(ellipse at 20% 10%, black 30%, transparent 70%);
   pointer-events: none;
 }
 
-.hero > * {
+.hero-inner {
   position: relative;
   z-index: 1;
-}
-
-.eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 1.4px;
-  text-transform: uppercase;
-  color: var(--blue-accent);
-  margin-bottom: 14px;
-}
-
-.eyebrow::before {
-  content: "";
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--blue-accent);
-  box-shadow: 0 0 0 4px rgba(91, 155, 213, 0.18);
-}
-
-.hero h1 {
-  font-size: 36px;
-  line-height: 1.15;
-  margin: 0 0 14px;
-  letter-spacing: -0.3px;
-}
-
-.hero h1 .accent {
-  color: var(--blue-accent);
-}
-
-.hero p {
-  font-size: 16px;
-  color: rgba(255, 255, 255, 0.78);
-  max-width: 460px;
+  max-width: 920px;
   margin: 0 auto;
 }
 
-.hero-terminal {
-  margin: 30px auto 0;
-  max-width: 300px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 12px;
-  padding: 14px 18px 16px;
-  text-align: left;
-  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
-  font-size: 12.5px;
+.hero-copy {
+  max-width: 540px;
 }
 
-.terminal-dots {
+.eyebrow {
   display: flex;
-  gap: 6px;
-  margin-bottom: 10px;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  margin: 0 0 22px;
 }
 
-.terminal-dots span {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.25);
+.eyebrow::before {
+  content: "—";
+  color: var(--amber);
 }
 
-.terminal-row {
-  color: rgba(255, 255, 255, 0.65);
-  margin-top: 6px;
+main .eyebrow,
+.legal .eyebrow {
+  color: var(--text-muted);
 }
 
-.terminal-row .prompt {
+main .eyebrow::before,
+.legal .eyebrow::before {
   color: var(--blue-accent);
-  margin-right: 6px;
 }
 
-.terminal-row.ok {
-  color: #7bd88f;
+.hero h1 {
+  font-family: var(--serif);
+  font-weight: 560;
+  font-size: 46px;
+  line-height: 1.12;
+  letter-spacing: -0.5px;
+  margin: 0 0 20px;
 }
 
-.terminal-row.muted {
+.hero h1 em {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--amber);
+}
+
+.hero p.lede {
+  font-size: 16.5px;
+  color: rgba(255, 255, 255, 0.75);
+  max-width: 460px;
+  margin: 0;
+}
+
+.hero p.lede strong {
+  color: #fff;
+  font-weight: 600;
+}
+
+/* ---------- Boarding-pass card ---------- */
+
+.ticket {
+  display: flex;
+  margin-top: 40px;
+  max-width: 400px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.ticket-main {
+  flex: 1;
+  padding: 18px 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px 18px;
+}
+
+.ticket-field {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.ticket-label {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.ticket-value {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+}
+
+.ticket-value.ok { color: #8fd79b; }
+
+.ticket-stub {
+  width: 96px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.ticket-stub::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 10px;
+  bottom: 10px;
+  border-left: 2px dashed rgba(255, 255, 255, 0.22);
+}
+
+.ticket-stub span {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
   color: rgba(255, 255, 255, 0.45);
 }
+
+.ticket-stub strong {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--amber);
+}
+
+/* ---------- Page head (legal pages) ---------- */
 
 .page-head {
   max-width: 760px;
   margin: 0 auto;
-  padding: 44px 24px 8px;
+  padding: 48px 24px 8px;
 }
 
 .page-head h1 {
-  font-size: 28px;
+  font-family: var(--serif);
+  font-weight: 560;
+  font-size: 32px;
   margin: 0 0 6px;
+  letter-spacing: -0.3px;
 }
 
 .page-head .updated {
@@ -208,11 +293,13 @@ main {
   padding: 0 24px 72px;
 }
 
+/* ---------- Cards ---------- */
+
 .cards {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 16px;
-  margin-top: -40px;
+  margin-top: -44px;
   position: relative;
   z-index: 2;
 }
@@ -222,7 +309,7 @@ main {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 24px;
-  box-shadow: 0 10px 30px rgba(13, 42, 82, 0.08);
+  box-shadow: 0 16px 36px rgba(13, 42, 82, 0.1);
 }
 
 .card h2 {
@@ -266,13 +353,18 @@ main {
   color: var(--text-muted);
 }
 
+/* ---------- FAQ ---------- */
+
 section.block {
-  margin-top: 56px;
+  margin-top: 64px;
 }
 
 section.block h2 {
-  font-size: 20px;
-  margin-bottom: 18px;
+  font-family: var(--serif);
+  font-weight: 560;
+  font-size: 24px;
+  margin: 0 0 20px;
+  letter-spacing: -0.2px;
 }
 
 .faq-item {
@@ -299,14 +391,15 @@ section.block h2 {
 .faq-q-wrap {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 16px;
 }
 
 .faq-num {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: 0.4px;
-  color: var(--blue-accent);
+  color: var(--amber);
   min-width: 20px;
 }
 
@@ -325,6 +418,8 @@ section.block h2 {
   color: var(--text-muted);
   font-size: 14.5px;
 }
+
+/* ---------- Legal pages ---------- */
 
 .legal h2 {
   font-size: 16px;
@@ -357,7 +452,10 @@ footer .footer-links {
 
 @media (max-width: 560px) {
   .cards { grid-template-columns: 1fr; }
-  .hero h1 { font-size: 26px; }
-  .site-nav { gap: 14px; }
+  .hero { padding: 56px 20px 84px; }
+  .hero h1 { font-size: 34px; }
+  .ticket { max-width: 100%; }
+  .ticket-main { grid-template-columns: 1fr 1fr; }
+  .site-nav { gap: 16px; }
   .site-nav a { font-size: 13px; }
 }
