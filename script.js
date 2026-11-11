@@ -58,6 +58,27 @@
     scheduleSweep();
   }
 
+  // Header: glass-over-content while at the top, solid once scrolled.
+  var header = document.querySelector(".site-header");
+  if (header) {
+    var headerTicking = false;
+    var updateHeader = function () {
+      header.classList.toggle("scrolled", window.scrollY > 24);
+      headerTicking = false;
+    };
+    window.addEventListener(
+      "scroll",
+      function () {
+        if (!headerTicking) {
+          window.requestAnimationFrame(updateHeader);
+          headerTicking = true;
+        }
+      },
+      { passive: true }
+    );
+    updateHeader();
+  }
+
   // Copy-to-clipboard buttons (contact page).
   document.querySelectorAll(".copy-btn").forEach(function (btn) {
     btn.addEventListener("click", function () {

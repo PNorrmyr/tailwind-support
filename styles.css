@@ -28,13 +28,29 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-a { color: var(--blue-accent); text-decoration: none; }
+a { color: var(--blue-accent); text-decoration: none; transition: color 0.15s ease; }
 a:hover { text-decoration: underline; }
 
 .site-header {
-  background: linear-gradient(135deg, var(--navy-dark), var(--navy) 60%, var(--navy-light));
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  background: rgba(8, 24, 48, 0.42);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
   color: #fff;
   padding: 18px 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04);
+  transition: background-color 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+.site-header.scrolled {
+  background: rgba(8, 20, 40, 0.86);
+  box-shadow: 0 10px 30px rgba(5, 14, 28, 0.25);
+  border-bottom-color: rgba(255, 255, 255, 0.1);
 }
 
 .site-header .header-inner {
@@ -51,6 +67,7 @@ a:hover { text-decoration: underline; }
   align-items: center;
   gap: 10px;
   color: #fff;
+  transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
 .brand img {
@@ -58,6 +75,7 @@ a:hover { text-decoration: underline; }
   height: 32px;
   border-radius: 8px;
   display: block;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
 
 .brand span {
@@ -67,6 +85,8 @@ a:hover { text-decoration: underline; }
 }
 
 .brand:hover { text-decoration: none; opacity: 0.9; }
+.brand:hover img { box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.14); transform: translateY(-1px); }
+.brand:active { transform: scale(0.97); }
 
 .site-nav {
   display: flex;
@@ -80,9 +100,24 @@ a:hover { text-decoration: underline; }
   font-size: 14px;
   font-weight: 500;
   padding-bottom: 4px;
+  transition: color 0.2s ease;
 }
 
 .site-nav a:hover { color: #fff; text-decoration: none; }
+
+.site-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 100%;
+  bottom: -2px;
+  height: 2px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.55);
+  transition: right 0.25s ease;
+}
+
+.site-nav a:not(.active):hover::after { right: 0; }
 
 .site-nav a.active { color: #fff; }
 
@@ -107,7 +142,7 @@ a:hover { text-decoration: underline; }
     radial-gradient(520px circle at 6% -4%, rgba(91, 155, 213, 0.22), transparent 55%),
     linear-gradient(160deg, var(--navy-dark), var(--navy) 55%, var(--navy-light));
   color: #fff;
-  padding: 76px 24px 96px;
+  padding: 108px 24px 96px;
 }
 
 .hero::before {
@@ -331,6 +366,12 @@ section.block.features {
   margin: 0 auto;
   transform: none !important;
   box-shadow: 0 24px 48px -16px rgba(13, 42, 82, 0.35), 0 0 0 1px rgba(13, 42, 82, 0.06);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.phone-standalone:hover {
+  transform: translateY(-8px) !important;
+  box-shadow: 0 34px 60px -14px rgba(13, 42, 82, 0.42), 0 0 0 1px rgba(13, 42, 82, 0.08);
 }
 
 .feature-copy {
@@ -367,7 +408,7 @@ section.block.features {
 .page-head {
   max-width: 760px;
   margin: 0 auto;
-  padding: 48px 24px 8px;
+  padding: 112px 24px 8px;
 }
 
 .page-head h1 {
@@ -420,7 +461,10 @@ section.block.features {
   border-radius: 12px;
   padding: 14px 16px;
   margin-bottom: 16px;
+  transition: border-color 0.2s ease;
 }
+
+.email-pill:hover { border-color: rgba(91, 155, 213, 0.4); }
 
 .email-pill span {
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
@@ -440,9 +484,11 @@ section.block.features {
   padding: 8px 14px;
   border-radius: 8px;
   cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.15s ease;
 }
 
-.copy-btn:hover { background: var(--navy-light); }
+.copy-btn:hover { background: var(--navy-light); transform: translateY(-1px); }
+.copy-btn:active { transform: translateY(0) scale(0.96); }
 
 .copy-btn.copied { background: #2f9e5c; }
 
@@ -467,6 +513,13 @@ main {
   border-radius: var(--radius);
   padding: 24px;
   box-shadow: 0 16px 36px rgba(13, 42, 82, 0.1);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 22px 44px rgba(13, 42, 82, 0.16);
+  border-color: rgba(91, 155, 213, 0.35);
 }
 
 .card h3 {
@@ -490,11 +543,19 @@ main {
   font-weight: 600;
   padding: 10px 18px;
   border-radius: 10px;
+  transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
 }
 
 .btn:hover {
   background: var(--navy-light);
   text-decoration: none;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(13, 42, 82, 0.22);
+}
+
+.btn:active {
+  transform: translateY(0);
+  box-shadow: none;
 }
 
 .btn.secondary {
@@ -502,7 +563,10 @@ main {
   color: var(--navy);
 }
 
-.btn.secondary:hover { background: #ddeaf8; }
+.btn.secondary:hover {
+  background: #ddeaf8;
+  box-shadow: 0 10px 20px rgba(91, 155, 213, 0.22);
+}
 
 /* ---------- FAQ ---------- */
 
@@ -524,6 +588,12 @@ section.block h2 {
   padding: 2px 18px;
   margin-bottom: 10px;
   background: var(--bg-soft);
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.faq-item:hover {
+  background: #eef2f6;
+  border-color: #d6dee6;
 }
 
 .faq-item summary {
@@ -560,9 +630,11 @@ section.block h2 {
   font-size: 20px;
   font-weight: 400;
   margin-left: 12px;
+  display: inline-block;
+  transition: transform 0.3s ease;
 }
 
-.faq-item[open] summary::after { content: "\2212"; }
+.faq-item[open] summary::after { transform: rotate(45deg); }
 
 .faq-item p {
   margin: 0 0 16px;
@@ -658,7 +730,23 @@ footer .footer-links {
 
 @media (prefers-reduced-motion: reduce) {
   .reveal { transition: none; }
-  .phone { transition: none; }
+  .phone,
+  .phone-standalone,
+  .card,
+  .btn,
+  .copy-btn,
+  .brand,
+  .brand img,
+  .site-header {
+    transition: none;
+  }
+  .card:hover,
+  .btn:hover {
+    transform: none;
+  }
+  .phone-standalone:hover {
+    transform: none !important;
+  }
 }
 
 @media (max-width: 860px) {
@@ -685,7 +773,7 @@ footer .footer-links {
 
 @media (max-width: 560px) {
   .cards { grid-template-columns: 1fr; }
-  .hero { padding: 56px 20px 72px; }
+  .hero { padding: 88px 20px 72px; }
   .hero h1 { font-size: 34px; }
   .phones { width: 300px; height: 400px; transform: scale(0.92); transform-origin: top center; }
   .site-header { padding: 16px 14px; }
