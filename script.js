@@ -58,6 +58,44 @@
     scheduleSweep();
   }
 
+  // Copy-to-clipboard buttons (contact page).
+  document.querySelectorAll(".copy-btn").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var targetEl = document.getElementById(btn.getAttribute("data-copy-target"));
+      if (!targetEl) return;
+      var text = targetEl.textContent.trim();
+      var showCopied = function () {
+        var original = btn.textContent;
+        btn.textContent = "Copied";
+        btn.classList.add("copied");
+        setTimeout(function () {
+          btn.textContent = original;
+          btn.classList.remove("copied");
+        }, 1800);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(showCopied, function () {
+          fallbackCopy(text);
+          showCopied();
+        });
+      } else {
+        fallbackCopy(text);
+        showCopied();
+      }
+    });
+  });
+
+  function fallbackCopy(text) {
+    var ta = document.createElement("textarea");
+    ta.value = text;
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand("copy"); } catch (e) {}
+    document.body.removeChild(ta);
+  }
+
   // Subtle parallax drift on the phone stack as the page scrolls.
   var parallaxEl = document.querySelector("[data-parallax]");
   if (parallaxEl && !prefersReducedMotion) {
