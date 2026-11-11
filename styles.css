@@ -4,7 +4,9 @@
   --navy-light: #163d73;
   --blue-accent: #5b9bd5;
   --blue-accent-soft: #e8f1fb;
+  --blue-accent-text: #2a6ea8; /* darker variant for text on light backgrounds — #5b9bd5 fails WCAG AA there (~3:1) */
   --amber: #e2a257;
+  --amber-text: #966022; /* darker variant for text on light backgrounds — #e2a257 fails WCAG AA there (~2:1) */
   --text: #16212e;
   --text-muted: #5a6472;
   --bg: #ffffff;
@@ -28,7 +30,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-a { color: var(--blue-accent); text-decoration: none; transition: color 0.15s ease; }
+a { color: var(--blue-accent-text); text-decoration: none; transition: color 0.15s ease; }
 a:hover { text-decoration: underline; }
 
 .site-header {
@@ -48,6 +50,16 @@ a:hover { text-decoration: underline; }
 }
 
 .site-header.scrolled {
+  background: rgba(8, 20, 40, 0.86);
+  box-shadow: 0 10px 30px rgba(5, 14, 28, 0.25);
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Pages with no dark hero behind the header: the glass effect over a white
+   page doesn't get dark enough for the nav text to pass contrast at rest
+   (measured ~2.1:1 vs the 4.5:1 required), so start solid instead of easing
+   into it on scroll. */
+body.no-hero .site-header {
   background: rgba(8, 20, 40, 0.86);
   box-shadow: 0 10px 30px rgba(5, 14, 28, 0.25);
   border-bottom-color: rgba(255, 255, 255, 0.1);
@@ -196,7 +208,7 @@ main .eyebrow,
 
 main .eyebrow::before,
 .legal .eyebrow::before {
-  color: var(--blue-accent);
+  color: var(--blue-accent-text);
 }
 
 .hero h1 {
@@ -383,7 +395,7 @@ section.block.features {
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
   font-size: 12px;
   font-weight: 600;
-  color: var(--blue-accent);
+  color: var(--blue-accent-text);
   margin-bottom: 10px;
 }
 
@@ -620,13 +632,13 @@ section.block h2 {
   font-size: 12px;
   font-weight: 600;
   letter-spacing: 0.4px;
-  color: var(--amber);
+  color: var(--amber-text);
   min-width: 20px;
 }
 
 .faq-item summary::after {
   content: "+";
-  color: var(--blue-accent);
+  color: var(--blue-accent-text);
   font-size: 20px;
   font-weight: 400;
   margin-left: 12px;
