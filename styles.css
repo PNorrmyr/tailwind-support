@@ -25,7 +25,9 @@ body {
   margin: 0;
   font-family: var(--sans);
   color: var(--text);
-  background: var(--bg);
+  background-color: var(--bg);
+  background-image: radial-gradient(rgba(13, 42, 82, 0.05) 1px, transparent 1px);
+  background-size: 26px 26px;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
 }
@@ -648,6 +650,11 @@ section.block h2 {
 
 .faq-item[open] summary::after { transform: rotate(45deg); }
 
+.faq-answer {
+  overflow: hidden;
+  transition: height 0.3s ease;
+}
+
 .faq-item p {
   margin: 0 0 16px;
   color: var(--text-muted);
@@ -749,7 +756,9 @@ footer .footer-links {
   .copy-btn,
   .brand,
   .brand img,
-  .site-header {
+  .site-header,
+  .faq-answer,
+  .faq-item summary::after {
     transition: none;
   }
   .card:hover,

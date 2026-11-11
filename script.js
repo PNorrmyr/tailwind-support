@@ -79,6 +79,51 @@
     updateHeader();
   }
 
+  // FAQ: animate the answer open/closed instead of the native instant snap.
+  document.querySelectorAll(".faq-item").forEach(function (item) {
+    var summary = item.querySelector("summary");
+    var answer = item.querySelector(".faq-answer");
+    if (!summary || !answer) return;
+
+    if (prefersReducedMotion) return; // native toggle behavior is already instant
+
+    summary.addEventListener("click", function (e) {
+      e.preventDefault();
+      if (item.hasAttribute("open")) {
+        closeItem();
+      } else {
+        openItem();
+      }
+    });
+
+    function openItem() {
+      item.setAttribute("open", "");
+      answer.style.height = "0px";
+      // Force a reflow so the browser commits height:0 before we read
+      // scrollHeight and animate away from it.
+      void answer.offsetHeight;
+      var target = answer.scrollHeight;
+      answer.style.height = target + "px";
+      answer.addEventListener("transitionend", function onEnd(ev) {
+        if (ev.propertyName !== "height") return;
+        answer.style.height = "auto";
+        answer.removeEventListener("transitionend", onEnd);
+      });
+    }
+
+    function closeItem() {
+      answer.style.height = answer.scrollHeight + "px";
+      void answer.offsetHeight;
+      answer.style.height = "0px";
+      answer.addEventListener("transitionend", function onEnd(ev) {
+        if (ev.propertyName !== "height") return;
+        item.removeAttribute("open");
+        answer.style.height = "";
+        answer.removeEventListener("transitionend", onEnd);
+      });
+    }
+  });
+
   // Copy-to-clipboard buttons (contact page).
   document.querySelectorAll(".copy-btn").forEach(function (btn) {
     btn.addEventListener("click", function () {
